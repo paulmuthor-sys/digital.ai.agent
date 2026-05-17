@@ -3,34 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital.AI.Agent — Автоматизация бизнеса и AI</title>
+    <title>Digital.AI.Agent - автоматизация бизнеса и AI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables */
         :root {
-            --bg-color: #FAFAFA;
-            --surface-color: #FFFFFF;
-            --text-main: #1d1d25;
-            --text-muted: #86868B;
-            --accent-warm: #FF7E5F;
-            --accent-gradient: linear-gradient(135deg, #FF7E5F 0%, #FEB47B 100%);
-            --border-color: rgba(0, 0, 0, 0.04);
-            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.04);
-            --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.08);
-            --shadow-glow: 0 12px 32px rgba(255, 126, 95, 0.3);
-            --radius-sm: 12px;
-            --radius-md: 24px;
-            --radius-lg: 32px;
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --bg: #fbfaf8;
+            --surface: rgba(255, 255, 255, 0.72);
+            --surface-strong: rgba(255, 255, 255, 0.9);
+            --ink: #16171d;
+            --ink-soft: #4c4f5a;
+            --muted: #777b88;
+            --line: rgba(28, 30, 38, 0.09);
+            --orange: #ff7a3d;
+            --orange-deep: #e85819;
+            --orange-soft: #fff0e8;
+            --blue: #2d6df6;
+            --green: #23a26d;
+            --violet: #7a5cff;
+            --shadow-sm: 0 18px 44px rgba(24, 25, 31, 0.08);
+            --shadow-md: 0 30px 90px rgba(24, 25, 31, 0.12);
+            --shadow-glow: 0 22px 55px rgba(255, 122, 61, 0.34);
+            --radius: 28px;
+            --radius-sm: 18px;
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Reset & Base */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         html {
@@ -38,486 +41,1131 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            min-height: 100vh;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 18% 7%, rgba(255, 122, 61, 0.18), transparent 31rem),
+                radial-gradient(circle at 82% 12%, rgba(45, 109, 246, 0.13), transparent 29rem),
+                linear-gradient(180deg, #fffaf6 0%, var(--bg) 42%, #ffffff 100%);
             line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: geometricPrecision;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.38;
+            background-image:
+                linear-gradient(rgba(22, 23, 29, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(22, 23, 29, 0.035) 1px, transparent 1px);
+            background-size: 72px 72px;
+            mask-image: linear-gradient(to bottom, black, transparent 72%);
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.07;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
         }
 
         ::selection {
-            background-color: var(--accent-warm);
-            color: #fff;
+            color: white;
+            background: var(--orange);
         }
 
         a {
-            text-decoration: none;
             color: inherit;
-            transition: var(--transition);
+            text-decoration: none;
         }
 
-        /* Layout */
         .container {
-            max-width: 1200px;
+            width: min(1180px, calc(100% - 48px));
             margin: 0 auto;
-            padding: 0 24px;
         }
 
-        section {
-            padding: 120px 0;
-        }
-
-        /* Typography */
-        h1 {
-            font-size: clamp(3rem, 6vw, 5.5rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.05;
-            margin-bottom: 24px;
-        }
-
-        h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-            margin-bottom: 16px;
-        }
-
-        .text-gradient {
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .subtitle {
-            font-size: clamp(1.2rem, 2vw, 1.5rem);
-            color: var(--text-muted);
-            font-weight: 400;
-            max-width: 700px;
-            letter-spacing: -0.01em;
-            line-height: 1.4;
-        }
-
-        .section-header {
-            margin-bottom: 64px;
-            text-align: center;
-        }
-
-        /* Header (Glassmorphism) */
-        header {
+        .site-header {
             position: fixed;
-            top: 0;
+            top: 16px;
             left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(250, 250, 250, 0.7);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
+            right: 0;
+            z-index: 20;
         }
 
-        .nav-container {
+        .nav {
+            width: min(1120px, calc(100% - 32px));
+            height: 64px;
+            margin: 0 auto;
+            padding: 0 10px 0 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 72px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
+            gap: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.74);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.68);
+            box-shadow: 0 12px 36px rgba(31, 32, 39, 0.08);
+            backdrop-filter: blur(24px) saturate(1.35);
+            -webkit-backdrop-filter: blur(24px) saturate(1.35);
         }
 
         .logo {
-            font-weight: 600;
-            font-size: 1.1rem;
-            letter-spacing: -0.01em;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 750;
+            letter-spacing: 0;
         }
 
-        .logo-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--accent-gradient);
-            border-radius: 50%;
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            border-radius: 10px;
+            background:
+                radial-gradient(circle at 30% 28%, #fff 0 12%, transparent 13%),
+                linear-gradient(135deg, #ff9a62 0%, #ff6d2d 48%, #17181d 100%);
+            box-shadow: 0 12px 28px rgba(255, 122, 61, 0.35);
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            align-items: center;
+            gap: 6px;
+            padding: 4px;
             list-style: none;
+            border: 1px solid rgba(22, 23, 29, 0.055);
+            border-radius: 999px;
+            background: rgba(247, 247, 247, 0.72);
         }
 
         .nav-links a {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-muted);
+            display: inline-flex;
+            padding: 9px 14px;
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 650;
+            transition: color 260ms var(--ease), background 260ms var(--ease);
         }
 
         .nav-links a:hover {
-            color: var(--text-main);
+            color: var(--ink);
+            background: white;
         }
 
-        /* Buttons */
+        .nav-cta,
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 16px 32px;
-            font-size: 1.05rem;
-            font-weight: 500;
-            border-radius: 999px;
-            border: none;
+            gap: 10px;
+            border: 0;
             cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
+            white-space: nowrap;
+            font-family: inherit;
+            transition: transform 360ms var(--ease), box-shadow 360ms var(--ease), background 360ms var(--ease);
+        }
+
+        .nav-cta {
+            min-height: 44px;
+            padding: 0 18px;
+            border-radius: 999px;
+            color: white;
+            font-size: 13px;
+            font-weight: 750;
+            background: #16171d;
+            box-shadow: 0 10px 28px rgba(22, 23, 29, 0.18);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            background: #000;
+        }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            padding: 156px 0 74px;
+            display: grid;
+            align-items: center;
+        }
+
+        .hero-shell {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1.04fr) minmax(360px, 0.96fr);
+            gap: 62px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            width: fit-content;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+            padding: 8px 12px 8px 8px;
+            border: 1px solid rgba(255, 122, 61, 0.2);
+            border-radius: 999px;
+            color: #a64a1d;
+            background: rgba(255, 247, 242, 0.86);
+            box-shadow: 0 12px 36px rgba(255, 122, 61, 0.08);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle, white 0 22%, transparent 23%),
+                linear-gradient(135deg, #ffb071, #ff6d2d);
+            box-shadow: 0 0 0 6px rgba(255, 122, 61, 0.11);
+        }
+
+        h1 {
+            max-width: 760px;
+            font-size: clamp(46px, 7.3vw, 92px);
+            font-weight: 800;
+            letter-spacing: 0;
+            line-height: 0.94;
+        }
+
+        .gradient-text {
+            color: transparent;
+            background: linear-gradient(105deg, #ff6d2d 0%, #f04d16 34%, #17181d 86%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .hero-copy {
+            max-width: 650px;
+            margin-top: 26px;
+            color: var(--ink-soft);
+            font-size: clamp(18px, 2vw, 22px);
+            line-height: 1.62;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 38px;
         }
 
         .btn-primary {
-            background: var(--accent-gradient);
-            color: #FFFFFF;
-            box-shadow: var(--shadow-glow);
+            min-height: 62px;
+            padding: 0 28px 0 32px;
+            border-radius: 999px;
+            color: white;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent 48%),
+                linear-gradient(135deg, #ff985c 0%, #ff6d2d 44%, #df4511 100%);
+            box-shadow: var(--shadow-glow), inset 0 1px 0 rgba(255, 255, 255, 0.34);
+        }
+
+        .btn-primary::after {
+            content: "->";
+            width: 30px;
+            height: 30px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.19);
+            transition: transform 360ms var(--ease), background 360ms var(--ease);
         }
 
         .btn-primary:hover {
-            transform: scale(1.02) translateY(-2px);
-            box-shadow: 0 16px 40px rgba(255, 126, 95, 0.4);
+            transform: translateY(-3px) scale(1.015);
+            box-shadow: 0 28px 70px rgba(255, 107, 45, 0.43), inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
 
-        .btn-small {
-            padding: 10px 20px;
-            font-size: 0.9rem;
-            background: var(--text-main);
-            color: #FFFFFF;
-            box-shadow: none;
+        .btn-primary:hover::after {
+            transform: translateX(3px);
+            background: rgba(255, 255, 255, 0.28);
         }
 
-        .btn-small:hover {
-            background: #000000;
-            transform: scale(1.02);
+        .btn-secondary {
+            min-height: 62px;
+            padding: 0 23px;
+            border: 1px solid rgba(22, 23, 29, 0.1);
+            border-radius: 999px;
+            color: var(--ink);
+            font-size: 15px;
+            font-weight: 750;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 12px 32px rgba(24, 25, 31, 0.06);
         }
 
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            background: white;
+            box-shadow: 0 18px 46px rgba(24, 25, 31, 0.1);
+        }
+
+        .trust-row {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 34px;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 650;
+        }
+
+        .metric-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 12px;
+            border: 1px solid rgba(22, 23, 29, 0.08);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.58);
+        }
+
+        .metric-pill strong {
+            color: var(--ink);
+        }
+
+        .product-stage {
+            position: relative;
+            min-height: 620px;
+            display: grid;
+            place-items: center;
+            perspective: 1200px;
+        }
+
+        .product-stage::before {
+            content: "";
+            position: absolute;
+            width: min(108%, 610px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 50% 50%, rgba(255, 122, 61, 0.2), transparent 52%),
+                radial-gradient(circle at 22% 28%, rgba(45, 109, 246, 0.16), transparent 28%);
+            filter: blur(10px);
+            animation: glowFloat 7s ease-in-out infinite alternate;
+        }
+
+        .dashboard {
+            position: relative;
+            width: min(100%, 520px);
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.82);
+            border-radius: 34px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.48));
+            box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(28px) saturate(1.45);
+            -webkit-backdrop-filter: blur(28px) saturate(1.45);
+            transform: rotateX(3deg) rotateY(-7deg);
+            animation: dashboardIn 900ms var(--ease) both;
+        }
+
+        .dash-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 18px;
+        }
+
+        .window-dots {
+            display: flex;
+            gap: 7px;
+        }
+
+        .window-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff7a3d;
+        }
+
+        .window-dots span:nth-child(2) {
+            background: #f9c45c;
+        }
+
+        .window-dots span:nth-child(3) {
+            background: #41c982;
+        }
+
+        .dash-label {
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .dash-hero {
+            padding: 28px;
+            border: 1px solid rgba(22, 23, 29, 0.06);
+            border-radius: 26px;
+            background:
+                radial-gradient(circle at 18% 10%, rgba(255, 122, 61, 0.18), transparent 34%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 250, 246, 0.82));
+        }
+
+        .dash-kicker {
+            color: var(--orange-deep);
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .dash-title {
+            margin-top: 12px;
+            font-size: 34px;
+            font-weight: 800;
+            letter-spacing: 0;
+            line-height: 1.04;
+        }
+
+        .dash-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .dash-card {
+            min-height: 116px;
+            padding: 18px;
+            border: 1px solid rgba(22, 23, 29, 0.075);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.75);
+            box-shadow: 0 14px 34px rgba(24, 25, 31, 0.06);
+            transition: transform 360ms var(--ease), box-shadow 360ms var(--ease);
+        }
+
+        .dash-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 44px rgba(24, 25, 31, 0.1);
+        }
+
+        .dash-card strong {
+            display: block;
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .dash-card span {
+            display: block;
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.35;
+        }
+
+        .flow {
+            display: grid;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .flow-line {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.68);
+            border: 1px solid rgba(22, 23, 29, 0.055);
+        }
+
+        .flow-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 10px;
+            background: var(--orange-soft);
+            box-shadow: inset 0 0 0 1px rgba(255, 122, 61, 0.12);
+        }
+
+        .flow-line b {
+            font-size: 13px;
+        }
+
+        .flow-line em {
+            color: var(--green);
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 800;
+        }
+
+        .float-card {
+            position: absolute;
+            z-index: 3;
+            width: 188px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.82);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.76);
+            box-shadow: 0 22px 60px rgba(24, 25, 31, 0.12);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            animation: cardFloat 5.8s ease-in-out infinite;
+        }
+
+        .float-card strong {
+            display: block;
+            font-size: 15px;
+            line-height: 1.25;
+        }
+
+        .float-card span {
+            display: block;
+            margin-top: 7px;
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 650;
+        }
+
+        .float-card.top {
+            top: 58px;
+            right: 0;
+        }
+
+        .float-card.bottom {
+            left: -8px;
+            bottom: 72px;
+            animation-delay: -2s;
+        }
+
+        section {
+            padding: 86px 0;
+        }
+
+        .section-header {
+            max-width: 760px;
+            margin: 0 auto 42px;
             text-align: center;
-            padding-top: 120px;
-            padding-bottom: 60px;
         }
 
-        .hero .subtitle {
-            margin: 0 auto 40px auto;
+        .section-header h2,
+        .contact h2 {
+            font-size: clamp(34px, 4.6vw, 58px);
+            font-weight: 800;
+            letter-spacing: 0;
+            line-height: 1.02;
         }
 
-        /* About Section */
+        .section-header p,
+        .contact p {
+            margin-top: 16px;
+            color: var(--muted);
+            font-size: clamp(16px, 1.9vw, 20px);
+            line-height: 1.65;
+        }
+
+        .about {
+            padding-top: 28px;
+        }
+
+        .about-panel {
+            position: relative;
+            padding: clamp(34px, 6vw, 64px);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            border-radius: var(--radius);
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(255, 247, 242, 0.58)),
+                radial-gradient(circle at 78% 18%, rgba(255, 122, 61, 0.2), transparent 30%);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .about-panel::after {
+            content: "";
+            position: absolute;
+            inset: auto 9% -40% auto;
+            width: 280px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: rgba(255, 122, 61, 0.16);
+            filter: blur(38px);
+        }
+
         .about-text {
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            line-height: 1.4;
-            color: var(--text-main);
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-            font-weight: 500;
-            letter-spacing: -0.01em;
+            position: relative;
+            z-index: 1;
+            max-width: 930px;
+            color: var(--ink);
+            font-size: clamp(24px, 3.1vw, 40px);
+            font-weight: 750;
+            line-height: 1.18;
+            letter-spacing: 0;
         }
 
-        /* Bento Box Services */
+        .muted-line {
+            color: var(--muted);
+        }
+
         .bento-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            grid-auto-rows: minmax(300px, auto);
+            grid-template-columns: repeat(12, 1fr);
+            gap: 18px;
         }
 
         .bento-card {
-            background: var(--surface-color);
-            border-radius: var(--radius-lg);
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: var(--shadow-soft);
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
             position: relative;
+            min-height: 280px;
+            grid-column: span 4;
+            padding: 26px;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: var(--radius);
+            background:
+                linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.52)),
+                radial-gradient(circle at 15% 0%, rgba(255, 122, 61, 0.12), transparent 34%);
+            box-shadow: 0 18px 52px rgba(24, 25, 31, 0.075);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: transform 380ms var(--ease), box-shadow 380ms var(--ease), border-color 380ms var(--ease);
+        }
+
+        .bento-card:nth-child(1),
+        .bento-card:nth-child(4) {
+            grid-column: span 8;
         }
 
         .bento-card:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-7px);
+            border-color: rgba(255, 122, 61, 0.22);
+            box-shadow: 0 28px 80px rgba(24, 25, 31, 0.12);
         }
-
-        /* Spans for Bento Layout */
-        .bento-card:nth-child(1) { grid-column: span 2; }
-        .bento-card:nth-child(2) { grid-column: span 1; }
-        .bento-card:nth-child(3) { grid-column: span 1; }
-        .bento-card:nth-child(4) { grid-column: span 2; }
-        .bento-card:nth-child(5) { grid-column: span 2; }
-        .bento-card:nth-child(6) { grid-column: span 1; }
 
         .card-icon {
             width: 48px;
             height: 48px;
-            margin-bottom: 32px;
-            border-radius: var(--radius-sm);
-            background: var(--bg-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-warm);
+            display: grid;
+            place-items: center;
+            margin-bottom: 42px;
+            border-radius: 16px;
+            color: var(--orange-deep);
+            background: rgba(255, 240, 232, 0.92);
+            box-shadow: inset 0 0 0 1px rgba(255, 122, 61, 0.14), 0 15px 28px rgba(255, 122, 61, 0.12);
         }
 
         .card-icon svg {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
         }
 
         .card-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            letter-spacing: -0.02em;
+            max-width: 560px;
+            font-size: clamp(22px, 2vw, 28px);
+            font-weight: 800;
+            letter-spacing: 0;
+            line-height: 1.12;
         }
 
         .card-desc {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.5;
+            max-width: 620px;
+            margin-top: 13px;
+            color: var(--muted);
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 1.65;
         }
 
-        /* Contact Section */
+        .card-tag {
+            position: absolute;
+            top: 22px;
+            right: 22px;
+            padding: 8px 10px;
+            border-radius: 999px;
+            color: #a64a1d;
+            background: rgba(255, 240, 232, 0.86);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
         .contact {
-            background: var(--surface-color);
-            border-radius: var(--radius-lg);
-            padding: 80px 40px;
+            position: relative;
+            overflow: hidden;
+            padding: clamp(42px, 7vw, 82px);
+            border: 1px solid rgba(255, 255, 255, 0.82);
+            border-radius: 34px;
             text-align: center;
-            box-shadow: var(--shadow-soft);
-            margin-bottom: 120px;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255, 122, 61, 0.2), transparent 36%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 248, 244, 0.7));
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border: 1px solid rgba(22, 23, 29, 0.055);
+            border-radius: 26px;
+            pointer-events: none;
+        }
+
+        .contact > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 34px;
         }
 
         .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 64px;
-            margin-top: 48px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 42px;
+            text-align: left;
         }
 
         .contact-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
+            padding: 18px;
+            border: 1px solid rgba(22, 23, 29, 0.075);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.62);
         }
 
         .contact-item span {
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 600;
         }
 
-        .contact-item strong {
-            font-size: 1.2rem;
-            font-weight: 500;
-        }
-
+        .contact-item strong,
         .contact-item a {
-            color: var(--text-main);
-            font-size: 1.2rem;
-            font-weight: 500;
+            display: block;
+            margin-top: 8px;
+            color: var(--ink);
+            font-size: 16px;
+            font-weight: 750;
         }
 
         .contact-item a:hover {
-            color: var(--accent-warm);
+            color: var(--orange-deep);
         }
 
-        /* Footer */
         footer {
+            padding: 34px 0 48px;
+            color: var(--muted);
+            font-size: 14px;
             text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.9rem;
         }
 
-        /* Responsive */
-        @media (max-width: 992px) {
-            .bento-grid {
-                grid-template-columns: repeat(2, 1fr);
+        .reveal {
+            animation: revealUp 760ms var(--ease) both;
+        }
+
+        .reveal.delay-1 {
+            animation-delay: 90ms;
+        }
+
+        .reveal.delay-2 {
+            animation-delay: 180ms;
+        }
+
+        @keyframes revealUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
             }
-            .bento-card:nth-child(1) { grid-column: span 2; }
-            .bento-card:nth-child(2) { grid-column: span 1; }
-            .bento-card:nth-child(3) { grid-column: span 1; }
-            .bento-card:nth-child(4) { grid-column: span 2; }
-            .bento-card:nth-child(5) { grid-column: span 2; }
-            .bento-card:nth-child(6) { grid-column: span 2; }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            section { padding: 80px 0; }
-            .hero { padding-top: 100px; padding-bottom: 40px; }
-            .bento-grid { grid-template-columns: 1fr; }
-            .bento-card:nth-child(n) { grid-column: span 1; }
-            .contact-info { gap: 32px; flex-direction: column; }
-            .contact { padding: 40px 24px; }
+        @keyframes dashboardIn {
+            from {
+                opacity: 0;
+                transform: translateY(22px) rotateX(5deg) rotateY(-11deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotateX(3deg) rotateY(-7deg);
+            }
+        }
+
+        @keyframes cardFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @keyframes glowFloat {
+            from {
+                transform: translate3d(-8px, 6px, 0) scale(0.98);
+            }
+            to {
+                transform: translate3d(12px, -12px, 0) scale(1.04);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (max-width: 980px) {
+            .hero {
+                padding-top: 136px;
+            }
+
+            .hero-shell {
+                grid-template-columns: 1fr;
+                gap: 44px;
+            }
+
+            .product-stage {
+                min-height: 520px;
+            }
+
+            .dashboard {
+                transform: none;
+            }
+
+            .bento-card,
+            .bento-card:nth-child(1),
+            .bento-card:nth-child(4) {
+                grid-column: span 6;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                width: min(100% - 28px, 1180px);
+            }
+
+            .site-header {
+                top: 10px;
+            }
+
+            .nav {
+                width: calc(100% - 20px);
+                padding-left: 14px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-cta {
+                min-height: 40px;
+                padding: 0 14px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 116px 0 48px;
+            }
+
+            h1 {
+                font-size: clamp(43px, 13.5vw, 62px);
+            }
+
+            .hero-copy {
+                margin-top: 22px;
+                font-size: 17px;
+            }
+
+            .hero-actions {
+                align-items: stretch;
+                flex-direction: column;
+                margin-top: 30px;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+
+            .trust-row {
+                gap: 10px;
+            }
+
+            .product-stage {
+                min-height: 0;
+                padding: 10px 0 54px;
+            }
+
+            .dashboard {
+                width: 100%;
+                border-radius: 28px;
+                transform: none;
+            }
+
+            .dash-title {
+                font-size: 28px;
+            }
+
+            .dash-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .float-card {
+                position: relative;
+                width: 100%;
+                inset: auto;
+                margin-top: 12px;
+                animation: none;
+            }
+
+            section {
+                padding: 58px 0;
+            }
+
+            .about-panel,
+            .contact,
+            .bento-card {
+                border-radius: 24px;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bento-card,
+            .bento-card:nth-child(1),
+            .bento-card:nth-child(4) {
+                grid-column: auto;
+                min-height: 250px;
+            }
+
+            .card-tag {
+                position: static;
+                width: fit-content;
+                margin-bottom: 20px;
+            }
+
+            .card-icon {
+                margin-bottom: 30px;
+            }
         }
     </style>
 </head>
 <body>
-
-    <!-- Header -->
-    <header>
-        <nav class="nav-container">
-            <a href="#" class="logo">
-                <div class="logo-dot"></div>
+    <header class="site-header">
+        <nav class="nav" aria-label="Главная навигация">
+            <a href="#hero" class="logo" aria-label="Digital.AI.Agent">
+                <span class="logo-mark" aria-hidden="true"></span>
                 Digital.AI.Agent
             </a>
             <ul class="nav-links">
-                <li><a href="#about">О подходе</a></li>
-                <li><a href="#services">Услуги</a></li>
+                <li><a href="#about">Подход</a></li>
+                <li><a href="#services">Решения</a></li>
                 <li><a href="#contact">Контакты</a></li>
             </ul>
-            <a href="#contact" class="btn btn-small">Связаться</a>
+            <a href="#contact" class="nav-cta">Обсудить проект</a>
         </nav>
     </header>
 
-    <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
-        <section class="hero container" id="hero">
-            <h1>Ускоряю ваш бизнес<br>с помощью <span class="text-gradient">кода и ИИ</span></h1>
-            <p class="subtitle">Создаю Telegram-ботов и ИИ-агентов, которые работают 24/7. Элегантная автоматизация на базе n8n и Python, освобождающая ваше время.</p>
-            <a href="#contact" class="btn btn-primary">Обсудить проект</a>
-        </section>
+        <section class="hero" id="hero">
+            <div class="container hero-shell">
+                <div class="hero-content">
+                    <div class="eyebrow reveal">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        AI-автоматизация для роста без лишней рутины
+                    </div>
+                    <h1 class="reveal delay-1">Собираю AI-системы, которые <span class="gradient-text">экономят время и продают</span></h1>
+                    <p class="hero-copy reveal delay-2">Telegram-боты, AI-агенты, n8n-сценарии и Python-автоматизация, которые работают как премиальный операционный слой бизнеса: быстро, чисто и 24/7.</p>
+                    <div class="hero-actions reveal delay-2">
+                        <a href="https://instagram.com/digital.ai.agent" target="_blank" rel="noreferrer" class="btn btn-primary">Написать в Direct</a>
+                        <a href="#services" class="btn btn-secondary">Смотреть решения</a>
+                    </div>
+                    <div class="trust-row reveal delay-2" aria-label="Ключевые преимущества">
+                        <span class="metric-pill"><strong>80%</strong> меньше ручных задач</span>
+                        <span class="metric-pill"><strong>24/7</strong> обработка заявок</span>
+                        <span class="metric-pill"><strong>AI + n8n</strong> под ваш процесс</span>
+                    </div>
+                </div>
 
-        <!-- About Section -->
-        <section class="container" id="about">
-            <p class="about-text">
-                Я не просто пишу код. Я проектирую цифровые экосистемы, которые <span class="text-gradient">сокращают рутину на 80%</span>, увеличивают конверсию и делают бизнес системным. Чистая архитектура, безупречная логика и премиальный подход к каждой задаче.
-            </p>
-        </section>
-
-        <!-- Services Section -->
-        <section class="container" id="services">
-            <div class="section-header">
-                <h2>Что я создаю</h2>
-                <p class="subtitle" style="margin: 0 auto;">Инструменты, которые приносят реальную прибыль.</p>
+                <div class="product-stage" aria-label="Визуализация AI-панели">
+                    <div class="float-card top">
+                        <strong>Лиды не теряются</strong>
+                        <span>CRM, мессенджеры и таблицы синхронизированы</span>
+                    </div>
+                    <div class="dashboard">
+                        <div class="dash-top">
+                            <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                            <div class="dash-label">Automation cockpit</div>
+                        </div>
+                        <div class="dash-hero">
+                            <div class="dash-kicker">Live AI workflow</div>
+                            <div class="dash-title">Заявка -> анализ -> ответ -> CRM</div>
+                            <div class="dash-grid">
+                                <div class="dash-card">
+                                    <strong>12 сек</strong>
+                                    <span>среднее время реакции бота на входящий запрос</span>
+                                </div>
+                                <div class="dash-card">
+                                    <strong>+31%</strong>
+                                    <span>потенциал роста конверсии за счет скорости</span>
+                                </div>
+                            </div>
+                            <div class="flow">
+                                <div class="flow-line">
+                                    <span class="flow-icon"></span>
+                                    <b>Instagram / Telegram</b>
+                                    <em>active</em>
+                                </div>
+                                <div class="flow-line">
+                                    <span class="flow-icon"></span>
+                                    <b>AI-квалификация</b>
+                                    <em>ready</em>
+                                </div>
+                                <div class="flow-line">
+                                    <span class="flow-icon"></span>
+                                    <b>CRM + уведомление</b>
+                                    <em>synced</em>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="float-card bottom">
+                        <strong>Рутина уходит в фон</strong>
+                        <span>Команда фокусируется на клиентах и деньгах</span>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="bento-grid">
-                <!-- Card 1 -->
-                <div class="bento-card">
-                    <div class="card-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    </div>
-                    <div>
-                        <h3 class="card-title">Сложные сценарии n8n</h3>
-                        <p class="card-desc">Связываю десятки сервисов в единый механизм. CRM, мессенджеры, почта и базы данных начинают работать как единое целое без участия человека.</p>
-                    </div>
+        <section class="about" id="about">
+            <div class="container">
+                <div class="about-panel">
+                    <p class="about-text">Я проектирую не просто ботов, а цифровые системы продаж и сервиса. <span class="gradient-text">Они забирают повторяющиеся задачи, ускоряют ответы и делают бизнес предсказуемее.</span> <span class="muted-line">Чистая архитектура, понятная логика и ощущение продукта высокого класса.</span></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Премиальные AI-решения для операционного роста</h2>
+                    <p>Каждый модуль собирается под вашу воронку, данные и реальный бизнес-процесс, без визуального и технического шума.</p>
                 </div>
 
-                <!-- Card 2 -->
-                <div class="bento-card">
-                    <div class="card-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <div>
-                        <h3 class="card-title">ИИ-Агенты</h3>
-                        <p class="card-desc">Нейросети, обученные на ваших данных, консультируют клиентов и закрывают сделки.</p>
-                    </div>
-                </div>
+                <div class="bento-grid">
+                    <article class="bento-card">
+                        <span class="card-tag">Core automation</span>
+                        <div class="card-icon" aria-hidden="true">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="card-title">Сложные сценарии n8n, которые связывают весь бизнес</h3>
+                        <p class="card-desc">CRM, мессенджеры, почта, таблицы и базы данных начинают работать как единая система. Заявки, статусы и уведомления проходят без ручных переключений.</p>
+                    </article>
 
-                <!-- Card 3 -->
-                <div class="bento-card">
-                    <div class="card-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <div>
-                        <h3 class="card-title">Python Боты</h3>
-                        <p class="card-desc">Telegram-боты любой сложности: от магазинов до корпоративных систем управления.</p>
-                    </div>
-                </div>
+                    <article class="bento-card">
+                        <span class="card-tag">AI sales</span>
+                        <div class="card-icon" aria-hidden="true">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="card-title">AI-агенты</h3>
+                        <p class="card-desc">Консультируют клиентов, квалифицируют лиды, отвечают в вашем стиле и передают менеджеру только то, что требует внимания.</p>
+                    </article>
 
-                <!-- Card 4 -->
-                <div class="bento-card">
-                    <div class="card-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
-                    </div>
-                    <div>
-                        <h3 class="card-title">Парсинг и работа с данными</h3>
-                        <p class="card-desc">Автоматический сбор информации с сайтов, мониторинг цен конкурентов и структурирование данных в удобные таблицы в реальном времени.</p>
-                    </div>
-                </div>
+                    <article class="bento-card">
+                        <span class="card-tag">Bots</span>
+                        <div class="card-icon" aria-hidden="true">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="card-title">Python и Telegram-боты</h3>
+                        <p class="card-desc">От простых помощников до внутренних систем управления, оплаты, уведомлений и персональных кабинетов.</p>
+                    </article>
 
-                <!-- Card 5 -->
-                <div class="bento-card">
-                    <div class="card-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                    </div>
-                    <div>
+                    <article class="bento-card">
+                        <span class="card-tag">Data layer</span>
+                        <div class="card-icon" aria-hidden="true">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                        </div>
+                        <h3 class="card-title">Парсинг, мониторинг и работа с данными</h3>
+                        <p class="card-desc">Сбор информации с сайтов, отслеживание цен конкурентов, структурирование данных и автоматическое обновление таблиц в реальном времени.</p>
+                    </article>
+
+                    <article class="bento-card">
+                        <span class="card-tag">CRM</span>
+                        <div class="card-icon" aria-hidden="true">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        </div>
                         <h3 class="card-title">Интеграция CRM</h3>
-                        <p class="card-desc">Бесшовная связь amoCRM, Bitrix24 или Notion с вашими внутренними процессами. Ни один лид не будет потерян.</p>
-                    </div>
-                </div>
+                        <p class="card-desc">amoCRM, Bitrix24, Notion и внутренние базы связываются с вашей воронкой так, чтобы ни один лид не остался без ответа.</p>
+                    </article>
 
-                <!-- Card 6 -->
-                <div class="bento-card">
-                    <div class="card-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <div>
-                        <h3 class="card-title">Поддержка</h3>
-                        <p class="card-desc">Обеспечиваю стабильную работу серверов и бесперебойность всех запущенных алгоритмов.</p>
-                    </div>
+                    <article class="bento-card">
+                        <span class="card-tag">Care</span>
+                        <div class="card-icon" aria-hidden="true">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="card-title">Поддержка и развитие</h3>
+                        <p class="card-desc">Стабильная работа, улучшение сценариев, мониторинг ошибок и аккуратные доработки после запуска.</p>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section class="container" id="contact">
-            <div class="contact">
-                <h2>Готовы оптимизировать бизнес?</h2>
-                <p class="subtitle" style="margin: 0 auto;">Напишите мне, и мы обсудим архитектуру вашего будущего решения.</p>
-                
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span>Instagram</span>
-                        <a href="https://instagram.com/digital.ai.agent" target="_blank">@digital.ai.agent</a>
+        <section id="contact">
+            <div class="container">
+                <div class="contact">
+                    <h2>Готовы убрать ручную работу из вашей воронки?</h2>
+                    <p>Напишите мне, и я предложу архитектуру автоматизации, которая даст быстрый эффект и будет выглядеть как продукт, а не временный скрипт.</p>
+                    <div class="contact-actions">
+                        <a href="https://instagram.com/digital.ai.agent" target="_blank" rel="noreferrer" class="btn btn-primary">Получить консультацию</a>
                     </div>
-                    <div class="contact-item">
-                        <span>Локация</span>
-                        <strong>Worldwide (Remote)</strong>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>Instagram</span>
+                            <a href="https://instagram.com/digital.ai.agent" target="_blank" rel="noreferrer">@digital.ai.agent</a>
+                        </div>
+                        <div class="contact-item">
+                            <span>Формат</span>
+                            <strong>Worldwide / Remote</strong>
+                        </div>
+                        <div class="contact-item">
+                            <span>Время работы</span>
+                            <strong>10:00 - 19:00</strong>
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <span>Часы работы</span>
-                        <strong>10:00 — 19:00 (GMT+3)</strong>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 48px;">
-                    <a href="https://instagram.com/digital.ai.agent" target="_blank" class="btn btn-primary">Написать в Direct</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="container">
-        <p>&copy; 2024 Digital.AI.Agent. Разработано с использованием интеллекта.</p>
+        <p>&copy; 2026 Digital.AI.Agent. AI-автоматизация, которая выглядит и работает премиально.</p>
     </footer>
-
 </body>
 </html>
