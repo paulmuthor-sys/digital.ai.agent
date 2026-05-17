@@ -599,8 +599,12 @@
         .float-card {
             position: absolute;
             z-index: 3;
-            width: 188px;
-            padding: 16px;
+            width: 214px;
+            min-height: 112px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             border: 1px solid rgba(255, 255, 255, 0.82);
             border-radius: 22px;
             background: rgba(255, 255, 255, 0.76);
@@ -612,16 +616,18 @@
 
         .float-card strong {
             display: block;
-            font-size: 15px;
-            line-height: 1.25;
+            font-size: 16px;
+            line-height: 1.22;
+            letter-spacing: 0;
         }
 
         .float-card span {
             display: block;
-            margin-top: 7px;
+            margin-top: 8px;
             color: var(--muted);
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 650;
+            line-height: 1.38;
         }
 
         .float-card.top {
@@ -810,18 +816,19 @@
 
         .visual-caption {
             position: absolute;
-            left: 20px;
-            right: 20px;
-            bottom: 18px;
+            left: 22px;
+            right: 22px;
+            bottom: 20px;
             z-index: 2;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            padding: 12px 14px;
+            min-height: 58px;
+            padding: 14px 18px;
             border: 1px solid rgba(255, 255, 255, 0.72);
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.78);
             box-shadow: 0 16px 36px rgba(24, 25, 31, 0.08);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
@@ -829,13 +836,19 @@
 
         .visual-caption strong {
             color: var(--ink);
-            font-size: 14px;
-            line-height: 1.25;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: 0;
         }
 
         .visual-caption span {
+            flex: 0 0 auto;
+            padding: 7px 10px;
+            border-radius: 999px;
             color: var(--orange-deep);
-            font-size: 12px;
+            background: rgba(255, 240, 232, 0.82);
+            font-size: 13px;
             font-weight: 800;
         }
 
@@ -1347,6 +1360,7 @@
             .float-card {
                 position: relative;
                 width: 100%;
+                min-height: 104px;
                 inset: auto;
                 margin-top: 12px;
                 animation: none;
@@ -1360,6 +1374,23 @@
 
             .visual-stack {
                 grid-template-columns: 1fr;
+            }
+
+            .visual-caption {
+                left: 14px;
+                right: 14px;
+                bottom: 14px;
+                min-height: 54px;
+                padding: 12px 14px;
+            }
+
+            .visual-caption strong {
+                font-size: 15px;
+            }
+
+            .visual-caption span {
+                padding: 6px 9px;
+                font-size: 12px;
             }
 
             section {
@@ -1509,7 +1540,7 @@
                         </picture>
                         <figcaption class="visual-caption">
                             <strong>AI workflow cockpit</strong>
-                            <span>premium visual</span>
+                            <span>Premium</span>
                         </figcaption>
                     </figure>
 
@@ -1521,7 +1552,7 @@
                                 <img src="assets/ai-agent-card-640.jpg" srcset="assets/ai-agent-card-360.jpg 360w, assets/ai-agent-card-640.jpg 640w" sizes="(max-width: 760px) calc(100vw - 28px), 280px" width="640" height="640" loading="lazy" decoding="async" alt="Стеклянный AI-ассистент с чат-интерфейсами в светлой премиальной стилистике">
                             </picture>
                             <figcaption class="visual-caption">
-                                <strong>AI agents</strong>
+                                <strong>AI-агенты</strong>
                                 <span>24/7</span>
                             </figcaption>
                         </figure>
@@ -1534,7 +1565,7 @@
                             </picture>
                             <figcaption class="visual-caption">
                                 <strong>Data pipelines</strong>
-                                <span>synced</span>
+                                <span>Synced</span>
                             </figcaption>
                         </figure>
                     </div>
