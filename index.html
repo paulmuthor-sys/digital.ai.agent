@@ -88,6 +88,12 @@
             text-decoration: none;
         }
 
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
         .container {
             width: min(1180px, calc(100% - 48px));
             margin: 0 auto;
@@ -616,6 +622,100 @@
             color: var(--muted);
         }
 
+        .visual-showcase {
+            padding-top: 34px;
+        }
+
+        .visual-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        .visual-card {
+            position: relative;
+            overflow: hidden;
+            min-height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.84);
+            border-radius: 32px;
+            background: rgba(255, 255, 255, 0.62);
+            box-shadow: 0 26px 76px rgba(24, 25, 31, 0.1);
+            isolation: isolate;
+        }
+
+        .visual-card picture,
+        .visual-card img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .visual-card img {
+            object-fit: cover;
+            transform: scale(1.01);
+            transition: transform 700ms var(--ease), filter 700ms var(--ease);
+        }
+
+        .visual-card:hover img {
+            transform: scale(1.045);
+            filter: saturate(1.05) contrast(1.02);
+        }
+
+        .visual-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background:
+                linear-gradient(180deg, transparent 52%, rgba(255, 255, 255, 0.56) 100%),
+                radial-gradient(circle at 18% 18%, rgba(255, 122, 61, 0.18), transparent 30%);
+        }
+
+        .visual-card.large {
+            min-height: 430px;
+        }
+
+        .visual-stack {
+            display: grid;
+            gap: 18px;
+        }
+
+        .visual-card.small {
+            min-height: 206px;
+        }
+
+        .visual-caption {
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            bottom: 18px;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 16px 36px rgba(24, 25, 31, 0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .visual-caption strong {
+            color: var(--ink);
+            font-size: 14px;
+            line-height: 1.25;
+        }
+
+        .visual-caption span {
+            color: var(--orange-deep);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
@@ -854,6 +954,14 @@
                 transform: none;
             }
 
+            .visual-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .visual-stack {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .bento-card,
             .bento-card:nth-child(1),
             .bento-card:nth-child(4) {
@@ -942,6 +1050,16 @@
                 inset: auto;
                 margin-top: 12px;
                 animation: none;
+            }
+
+            .visual-card.large,
+            .visual-card.small {
+                min-height: auto;
+                aspect-ratio: 4 / 3;
+            }
+
+            .visual-stack {
+                grid-template-columns: 1fr;
             }
 
             section {
@@ -1068,6 +1186,50 @@
             <div class="container">
                 <div class="about-panel">
                     <p class="about-text">Я проектирую не просто ботов, а цифровые системы продаж и сервиса. <span class="gradient-text">Они забирают повторяющиеся задачи, ускоряют ответы и делают бизнес предсказуемее.</span> <span class="muted-line">Чистая архитектура, понятная логика и ощущение продукта высокого класса.</span></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="visual-showcase" aria-label="Примеры визуального стиля AI-автоматизации">
+            <div class="container">
+                <div class="visual-grid">
+                    <figure class="visual-card large">
+                        <picture>
+                            <source type="image/avif" srcset="assets/hero-ai-automation-760.avif 760w, assets/hero-ai-automation-1120.avif 1120w" sizes="(max-width: 980px) calc(100vw - 28px), 820px">
+                            <source type="image/webp" srcset="assets/hero-ai-automation-760.webp 760w, assets/hero-ai-automation-1120.webp 1120w" sizes="(max-width: 980px) calc(100vw - 28px), 820px">
+                            <img src="assets/hero-ai-automation-1120.jpg" srcset="assets/hero-ai-automation-760.jpg 760w, assets/hero-ai-automation-1120.jpg 1120w" sizes="(max-width: 980px) calc(100vw - 28px), 820px" width="1120" height="840" loading="lazy" decoding="async" alt="Минималистичная визуализация AI-автоматизации с интерфейсами, связями и оранжевыми акцентами">
+                        </picture>
+                        <figcaption class="visual-caption">
+                            <strong>AI workflow cockpit</strong>
+                            <span>premium visual</span>
+                        </figcaption>
+                    </figure>
+
+                    <div class="visual-stack">
+                        <figure class="visual-card small">
+                            <picture>
+                                <source type="image/avif" srcset="assets/ai-agent-card-360.avif 360w, assets/ai-agent-card-640.avif 640w" sizes="(max-width: 760px) calc(100vw - 28px), 280px">
+                                <source type="image/webp" srcset="assets/ai-agent-card-360.webp 360w, assets/ai-agent-card-640.webp 640w" sizes="(max-width: 760px) calc(100vw - 28px), 280px">
+                                <img src="assets/ai-agent-card-640.jpg" srcset="assets/ai-agent-card-360.jpg 360w, assets/ai-agent-card-640.jpg 640w" sizes="(max-width: 760px) calc(100vw - 28px), 280px" width="640" height="640" loading="lazy" decoding="async" alt="Стеклянный AI-ассистент с чат-интерфейсами в светлой премиальной стилистике">
+                            </picture>
+                            <figcaption class="visual-caption">
+                                <strong>AI agents</strong>
+                                <span>24/7</span>
+                            </figcaption>
+                        </figure>
+
+                        <figure class="visual-card small">
+                            <picture>
+                                <source type="image/avif" srcset="assets/data-automation-card-360.avif 360w, assets/data-automation-card-640.avif 640w" sizes="(max-width: 760px) calc(100vw - 28px), 280px">
+                                <source type="image/webp" srcset="assets/data-automation-card-360.webp 360w, assets/data-automation-card-640.webp 640w" sizes="(max-width: 760px) calc(100vw - 28px), 280px">
+                                <img src="assets/data-automation-card-640.jpg" srcset="assets/data-automation-card-360.jpg 360w, assets/data-automation-card-640.jpg 640w" sizes="(max-width: 760px) calc(100vw - 28px), 280px" width="640" height="640" loading="lazy" decoding="async" alt="Премиальная 3D-визуализация пайплайна данных и автоматизации">
+                            </picture>
+                            <figcaption class="visual-caption">
+                                <strong>Data pipelines</strong>
+                                <span>synced</span>
+                            </figcaption>
+                        </figure>
+                    </div>
                 </div>
             </div>
         </section>
